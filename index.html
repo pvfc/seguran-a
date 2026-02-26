@@ -1046,50 +1046,52 @@ pvfc/procedimento-de-seguran-a-2nsform: scale(1.05);
 
 <script>
   // ─── PIN ───
-  const CORRECT = '12345';
-  const inputs = document.querySelectorAll('.pin-inputs input');
+  // ─── PIN ───
+const CORRECT = ['12345', '00000', '11111', '22222', '33333', '44444', '55555', '66666', '77777', '88888'];
 
-  inputs.forEach((inp, i) => {
-    inp.addEventListener('input', () => {
-      if (inp.value) {
-        inp.classList.add('filled');
-        if (i < 4) inputs[i + 1].focus();
-        else checkPin();
-      } else {
-        inp.classList.remove('filled');
-      }
-    });
-    inp.addEventListener('keydown', e => {
-      if (e.key === 'Backspace' && !inp.value && i > 0) {
-        inputs[i - 1].focus();
-        inputs[i - 1].classList.remove('filled');
-      }
-    });
-  });
+const inputs = document.querySelectorAll('.pin-inputs input');
 
-  inputs[0].focus();
-
-  function checkPin() {
-    const val = Array.from(inputs).map(i => i.value).join('');
-    if (val === CORRECT) {
-      document.getElementById('login-screen').classList.add('hide');
-      setTimeout(() => {
-        document.getElementById('login-screen').style.display = 'none';
-        const main = document.getElementById('main-site');
-        main.classList.add('visible');
-        renderBook();
-      }, 600);
+inputs.forEach((inp, i) => {
+  inp.addEventListener('input', () => {
+    if (inp.value) {
+      inp.classList.add('filled');
+      if (i < 4) inputs[i + 1].focus();
+      else checkPin();
     } else {
-      document.getElementById('pinError').classList.add('show');
-      inputs.forEach(i => { i.value = ''; i.classList.remove('filled'); });
-      inputs[0].focus();
-      setTimeout(() => document.getElementById('pinError').classList.remove('show'), 3000);
+      inp.classList.remove('filled');
     }
-  }
+  });
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'Backspace' && !inp.value && i > 0) {
+      inputs[i - 1].focus();
+      inputs[i - 1].classList.remove('filled');
+    }
+  });
+});
 
-  function logout() {
-    location.reload();
+inputs[0].focus();
+
+function checkPin() {
+  const val = Array.from(inputs).map(i => i.value).join('');
+  if (CORRECT.includes(val)) {
+    document.getElementById('login-screen').classList.add('hide');
+    setTimeout(() => {
+      document.getElementById('login-screen').style.display = 'none';
+      const main = document.getElementById('main-site');
+      main.classList.add('visible');
+      renderBook();
+    }, 600);
+  } else {
+    document.getElementById('pinError').classList.add('show');
+    inputs.forEach(i => { i.value = ''; i.classList.remove('filled'); });
+    inputs[0].focus();
+    setTimeout(() => document.getElementById('pinError').classList.remove('show'), 3000);
   }
+}
+
+function logout() {
+  location.reload();
+}
 
   // ─── BOOK ───
   // Para trocar os nomes dos arquivos, edite o array abaixo.
@@ -1104,31 +1106,31 @@ pvfc/procedimento-de-seguran-a-2nsform: scale(1.05);
     { src: 'imagem/07.jpeg',  name: 'Procedimento 07' },
     { src: 'imagem/08.jpeg',  name: 'Procedimento 08' },
     { src: 'imagem/09.jpeg',  name: 'Procedimento 09' },
-    { src: '  imagem/10.jpeg   ', name: 'Procedimento 10' },
-    { src: '   imagem/11.jpeg  ', name: 'Procedimento 11' },
-    { src: '  imagem/12.jpeg    ', name: 'Procedimento 12' },
-    { src: ' imagem/13.jpeg    ', name: 'Procedimento 13' },
-    { src: ' imagem/14.jpeg   ', name: 'Procedimento 14' },
-    { src: '  imagem/15.jpeg   ', name: 'Procedimento 15' },
-    { src: '  imagem/16.jpeg  ', name: 'Procedimento 16' },
-    { src: '   imagem/17.jpeg  ', name: 'Procedimento 17' },
-    { src: '  imagem/18.jpeg    ', name: 'Procedimento 18' },
-    { src: '  imagem/19.jpeg    ', name: 'Procedimento 19' },
-    { src: '  imagem/20.jpeg     ', name: 'Procedimento 20' },
-    { src: ' imagem/21.jpeg     ', name: 'Procedimento 21' },
-    { src: '  imagem/22.jpeg    ', name: 'Procedimento 22' },
-    { src: '   imagem/23.jpeg   ', name: 'Procedimento 23' },
-    { src: ' imagem/24.jpeg     ', name: 'Procedimento 24' },
-    { src: '    imagem/25.jpeg  ', name: 'Procedimento 25' },
-    { src: '    imagem/26.jpeg  ', name: 'Procedimento 26' },
-    { src: '    imagem/27.jpeg   ', name: 'Procedimento 27' },
-    { src: '    imagem/28.jpeg  ', name: 'Procedimento 28' },
-    { src: '   imagem/29.jpeg   ', name: 'Procedimento 29' },
-    { src: '  imagem/30.jpeg     ', name: 'Procedimento 30' },
-    { src: '   imagem/31.jpeg    ', name: 'Procedimento 31' },
-    { src: '    imagem/32.jpeg  ', name: 'Procedimento 32' },
-    { src: '   imagem/33.jpeg   ', name: 'Procedimento 33' },
-    { src: '   imagem/34.jpeg   ', name: 'Procedimento 34' },
+    { src: 'imagem/10.jpeg',  name: 'Procedimento 10' },
+    { src: 'imagem/11.jpeg',  name: 'Procedimento 11' },
+    { src: 'imagem/12.jpeg',  name: 'Procedimento 12' },
+    { src: 'imagem/13.jpeg',  name: 'Procedimento 13' },
+    { src: 'imagem/14.jpeg',  name: 'Procedimento 14' },
+    { src: 'imagem/15.jpeg',  name: 'Procedimento 15' },
+    { src: 'imagem/16.jpeg',  name: 'Procedimento 16' },
+    { src: 'imagem/17.jpeg',  name: 'Procedimento 17' },
+    { src: 'imagem/18.jpeg',  name: 'Procedimento 18' },
+    { src: 'imagem/19.jpeg',  name: 'Procedimento 19' },
+    { src: 'imagem/20.jpeg',  name: 'Procedimento 20' },
+    { src: 'imagem/21.jpeg',  name: 'Procedimento 21' },
+    { src: 'imagem/22.jpeg',  name: 'Procedimento 22' },
+    { src: 'imagem/23.jpeg',  name: 'Procedimento 23' },
+    { src: 'imagem/24.jpeg',  name: 'Procedimento 24' },
+    { src: 'imagem/25.jpeg',  name: 'Procedimento 25' },
+    { src: 'imagem/26.jpeg',  name: 'Procedimento 26' },
+    { src: 'imagem/27.jpeg',  name: 'Procedimento 27' },
+    { src: 'imagem/28.jpeg',  name: 'Procedimento 28' },
+    { src: 'imagem/29.jpeg',  name: 'Procedimento 29' },
+    { src: 'imagem/30.jpeg',  name: 'Procedimento 30' },
+    { src: 'imagem/31.jpeg',  name: 'Procedimento 31' },
+    { src: 'imagem/32.jpeg',  name: 'Procedimento 32' },
+    { src: 'imagem/33.jpeg',  name: 'Procedimento 33' },
+    { src: 'imagem/34.jpeg',  name: 'Procedimento 34' },
   ];
 
   let images = imageFiles;
